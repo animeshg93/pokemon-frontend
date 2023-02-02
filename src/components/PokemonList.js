@@ -6,8 +6,10 @@ export default class PokemonList extends React.Component {
 
     render(){
         let arr = [];
-        for(let i = 0; i < 5; i++){
-            arr.push(<a href="https://www.google.com"><HekkinDiv /></a>);
+        let names = ['eevee', 'meowth', 'flareon', 'jolteon']
+        for(let i = 0; i < names.length; i++){
+            let url = "https://pokeapi.co/api/v2/pokemon-form/" + names[i];
+            arr.push(<a href={url}><HekkinDiv /></a>);
         }
 
         return(
