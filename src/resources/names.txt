@@ -1,0 +1,13 @@
+eevee
+jolteon
+flareon
+meowth
+snorlax
+Ivysaur
+Venusaur
+Charmander
+Charmeleon
+Charizard
+Squirtle
+Wartortle
+Blastoise
