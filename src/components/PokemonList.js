@@ -20,11 +20,9 @@ export default class PokemonList extends React.Component {
 
             for(let i = 0; i < names.length; i++){
                 let url = "https://pokeapi.co/api/v2/pokemon-form/" + names[i].toLowerCase()
-                temp.push(<a href={url}><HekkinDiv /></a>)
+                temp.push(<a href={url}><HekkinDiv name={names[i]}/></a>)
             }
-            return temp
-        })
-        .then((temp) => {
+            
             this.setState({
                 pokemonList:temp
             })
