@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import '../css/hekkinDiv.css'
+import '../css/pokemon.css'
 
-export default class HekkinDiv extends React.Component {
+export default class PokemonDiv extends React.Component {
     constructor(props){
         super(props)
         this.state = {
@@ -12,8 +12,8 @@ export default class HekkinDiv extends React.Component {
 
     render(){
         return(
-            <div className='stupid-div'>
-                <h3>{this.state.name}</h3>
+            <div className='pokemon'>
+                
             </div>
         )
     }

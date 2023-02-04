@@ -4,3 +4,11 @@
     padding-right: 10%;
     padding-top: 10%;
 }
+
+.pokemonLink {
+    display: inline-block;
+}
+
+.pokemonLink h3{
+    text-align: center;
+}

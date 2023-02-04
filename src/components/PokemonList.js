@@ -1,5 +1,5 @@
 import React from 'react';
-import HekkinDiv from './HekkinDiv';
+import PokemonDiv from './PokemonDiv';
 import '../css/pokemonList.css'
 import raw from '../resources/names.txt'
 
@@ -17,22 +17,31 @@ export default class PokemonList extends React.Component {
         .then(text => {
             let temp = []
             let names = text.split("\n")
-
-            for(let i = 0; i < names.length; i++){
-                let url = "https://pokeapi.co/api/v2/pokemon-form/" + names[i].toLowerCase()
-                temp.push(<a href={url}><HekkinDiv name={names[i]}/></a>)
-            }
             
             this.setState({
-                pokemonList:temp
+                pokemonList:names
             })
         })
     }
 
     render(){
+        let render = []
+        let temp = this.state.pokemonList
+        let pokemonAPI = "https://pokeapi.co/api/v2/pokemon-form/"
+
+        for(let i = 0; i < temp.length; i++){
+            let pokemonName = temp[i]
+            render.push(
+                    <a className = "pokemonLink" href={pokemonAPI + pokemonName.toLowerCase()}>
+                        <PokemonDiv name={pokemonName}/>
+                        <h3>{pokemonName}</h3>
+                    </a>
+               )
+        }
+
         return(
             <div className='list'>
-                    {this.state.pokemonList}
+                    {render}
             </div>
         )
     }
