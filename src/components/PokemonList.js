@@ -33,7 +33,7 @@ export default class PokemonList extends React.Component {
             let pokemonName = temp[i]
             render.push(
                     <a className = "pokemonLink" href={pokemonAPI + pokemonName.toLowerCase()}>
-                        <PokemonDiv name={pokemonName}/>
+                        <PokemonDiv name={pokemonName.toLowerCase()}/>
                         <h3>{pokemonName}</h3>
                     </a>
                )
