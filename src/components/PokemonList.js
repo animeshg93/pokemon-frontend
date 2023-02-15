@@ -14,30 +14,26 @@ export default class PokemonList extends React.Component {
     componentDidMount(){
         fetch(raw)
         .then(r => r.text())
-        .then(text => {
-            let temp = []
-            let names = text.split("\n")
-            
+        .then(text => {          
             this.setState({
-                pokemonList:names
+                pokemonList:text.split("\n")
             })
         })
     }
 
     render(){
         let renderedList = []
-        let length = this.state.pokemonList.length
         let pokemonAPI = "https://pokeapi.co/api/v2/pokemon-form/"
 
-        for(let i = 0; i < length; i++){
-            let pokemonName = this.state.pokemonList[i]
-            let renderedPokemon = <a className = "pokemonLink" href={pokemonAPI + pokemonName.toLowerCase()}>
+        this.state.pokemonList.forEach((pokemonName) => {
+            let renderedPokemon = 
+                                <a className = "pokemonLink" href={pokemonAPI + pokemonName.toLowerCase()}>
                                     <PokemonDiv name={pokemonName.toLowerCase()}/>
                                     <h3>{pokemonName}</h3>
                                 </a>
 
             renderedList.push(renderedPokemon)      
-        }
+        })
 
         return(
             <div className='list'>
