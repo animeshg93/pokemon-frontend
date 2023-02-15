@@ -3,9 +3,3 @@ Cloyster
 Gastly
 Haunter
 Gengar
-Onix
-Drowzee
-Hypno
-Krabby
-Kingler
-Victini
