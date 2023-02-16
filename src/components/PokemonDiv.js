@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
 import '../css/pokemon.css'
 
 export default class PokemonDiv extends React.Component {
@@ -13,7 +12,12 @@ export default class PokemonDiv extends React.Component {
 
     componentDidMount(){
         fetch('http://localhost:5000/'+this.state.name)
-        .then(resp => resp.json())
+        .then(resp => {
+            if(resp.status >= 400){
+                throw new Error("Server did not respond")
+            }
+            return resp.json();
+        })
         .then(data => {
             this.setState({
                 image:  data["image"]

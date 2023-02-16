@@ -1,5 +1,6 @@
 import React from 'react';
 import PokemonDiv from './PokemonDiv';
+import Pagination from './Pagination';
 import '../css/pokemonList.css'
 import raw from '../resources/names.txt'
 
@@ -7,7 +8,8 @@ export default class PokemonList extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            pokemonList: []
+            pokemonList: [],
+            fetched: false
         }
     }
     
@@ -16,29 +18,36 @@ export default class PokemonList extends React.Component {
         .then(r => r.text())
         .then(text => {          
             this.setState({
-                pokemonList:text.split("\n")
+                pokemonList:text.split("\n"),
+                fetched: true
             })
         })
     }
 
     render(){
-        let renderedList = []
-        let pokemonAPI = "https://pokeapi.co/api/v2/pokemon-form/"
+        if(!this.state.fetched){
+            return (null);
+        }
+        else{
+            let renderedList = []
+            let pokemonAPI = "https://pokeapi.co/api/v2/pokemon-form/"
 
-        this.state.pokemonList.forEach((pokemonName) => {
-            let renderedPokemon = 
-                                <a className = "pokemonLink" href={pokemonAPI + pokemonName.toLowerCase()}>
-                                    <PokemonDiv name={pokemonName.toLowerCase()}/>
-                                    <h3>{pokemonName}</h3>
-                                </a>
+            this.state.pokemonList.forEach(pokemonName => {
+                let renderedPokemon = 
+                                    <a className = "pokemonLink" href={pokemonAPI + pokemonName.toLowerCase()}>
+                                        <PokemonDiv name={pokemonName.toLowerCase()}/>
+                                        <h3>{pokemonName}</h3>
+                                    </a>
 
-            renderedList.push(renderedPokemon)      
-        })
+                renderedList.push(renderedPokemon)      
+            })
 
-        return(
-            <div className='list'>
-                    {renderedList}
-            </div>
-        )
+            return(
+                <div className='list'>
+                        {renderedList}
+                        <Pagination listSize={renderedList.length}/>
+                </div>
+            )
+        }
     }
 }
