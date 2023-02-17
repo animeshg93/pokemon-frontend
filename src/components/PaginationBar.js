@@ -2,20 +2,20 @@ import React, { useState } from 'react';
 import '../css/pagination.css'
 
 export default function PaginationBar(props) {
-        const [listSize, setListSize] = useState(props.listSize);
-    
-        let itemCount = 10
-        let paginationNumbers = Math.ceil(listSize/itemCount)
-        let paginationArr = Array.from(Array(paginationNumbers), (_, idx) => idx+1)
-        let renderedList = []
+    const {listSize} = props;
 
-        paginationArr.forEach(item => {
-            renderedList.push(<h3 className='number'>{item}</h3>)
-        })
+    let itemCount = 10
+    let paginationNumbers = Math.ceil(listSize / itemCount)
+    let paginationArr = Array.from(Array(paginationNumbers), (_, idx) => idx + 1)
+    let renderedList = []
 
-        return(
-            <div className='pagination'>
-                {renderedList}     
-            </div>
-        )
+    paginationArr.forEach(item => {
+        renderedList.push(<h3 className='number'>{item}</h3>)
+    })
+
+    return (
+        <div className='pagination'>
+            {renderedList}
+        </div>
+    )
 }
