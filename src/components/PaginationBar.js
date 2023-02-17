@@ -1,17 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../css/pagination.css'
 
-export default class Pagination extends React.Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            listSize: props.listSize
-        }
-    }
-
-    render(){
+export default function PaginationBar(props) {
+        const [listSize, setListSize] = useState(props.listSize);
+    
         let itemCount = 10
-        let paginationNumbers = Math.ceil(this.state.listSize/itemCount)
+        let paginationNumbers = Math.ceil(listSize/itemCount)
         let paginationArr = Array.from(Array(paginationNumbers), (_, idx) => idx+1)
         let renderedList = []
 
@@ -24,5 +18,4 @@ export default class Pagination extends React.Component {
                 {renderedList}     
             </div>
         )
-    }
 }

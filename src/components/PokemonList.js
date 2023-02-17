@@ -1,53 +1,29 @@
-import React from 'react';
-import PokemonDiv from './PokemonDiv';
-import Pagination from './Pagination';
+import React, { useState, useEffect } from 'react';
+import Pagination from './PaginationBar';
+import {populateRenderedList} from '../util/pokemonListRenderUtil'
 import '../css/pokemonList.css'
 import raw from '../resources/names.txt'
 
-export default class PokemonList extends React.Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            pokemonList: [],
-            fetched: false
-        }
-    }
+export default function PokemonList (props) {
+    const [pokemonList, setPokemonList] = useState([])
+    const [isFetched, setIsFetched] = useState(false)
     
-    componentDidMount(){
+    useEffect(() => {
         fetch(raw)
         .then(r => r.text())
         .then(text => {          
-            this.setState({
-                pokemonList:text.split("\n"),
-                fetched: true
-            })
+            setPokemonList(text.split("\n"))
+            setIsFetched(true)
         })
-    }
+    },[])
 
-    render(){
-        if(!this.state.fetched){
-            return (null);
-        }
-        else{
-            let renderedList = []
-            let pokemonAPI = "https://pokeapi.co/api/v2/pokemon-form/"
-
-            this.state.pokemonList.forEach(pokemonName => {
-                let renderedPokemon = 
-                                    <a className = "pokemonLink" href={pokemonAPI + pokemonName.toLowerCase()}>
-                                        <PokemonDiv name={pokemonName.toLowerCase()}/>
-                                        <h3>{pokemonName}</h3>
-                                    </a>
-
-                renderedList.push(renderedPokemon)      
-            })
-
-            return(
-                <div className='list'>
-                        {renderedList}
-                        <Pagination listSize={renderedList.length}/>
-                </div>
-            )
-        }
-    }
+    let renderedList = []
+    populateRenderedList(renderedList, pokemonList)
+    
+    return !isFetched ? null : (
+        <div className='list'>
+            {renderedList}
+            <Pagination listSize={renderedList.length}/>
+        </div>
+    )
 }
